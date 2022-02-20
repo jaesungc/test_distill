@@ -3,13 +3,18 @@ title: "Test Page"
 description: |
   Welcome to the website. I hope you enjoy it!
 site: distill::distill_website
+output:
+  distill::distill_article:
+    toc: true
+author:
+  - name: 최재성 
+    url: https://sites.google.com/site/jaesungchoiecon/
+    affiliation: 성균관대 경제대학
+date: 2022-02-21   
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-
-# Learn more about creating websites with Distill at:
-# https://rstudio.github.io/distill/website.html
 
 ```
 
@@ -17,7 +22,6 @@ knitr::opts_chunk$set(echo = FALSE)
 - 최
 - 재
 - 성
-
 
 ## Sub-section
 ### Distill 활용 방법

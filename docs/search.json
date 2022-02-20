@@ -6,15 +6,35 @@
       "description": "Some additional details about the website",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-02-21T00:01:49+09:00"
+      "last_modified": "2022-02-21T00:23:31+09:00"
     },
     {
       "path": "index.html",
       "title": "Test Page",
       "description": "Welcome to the website. I hope you enjoy it!\n",
-      "author": [],
-      "contents": "\r\nTest Page\r\n최\r\n재\r\n성\r\nSub-section\r\nDistill 활용 방법\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-02-21T00:01:50+09:00"
+      "author": [
+        {
+          "name": "최재성",
+          "url": "https://sites.google.com/site/jaesungchoiecon/"
+        }
+      ],
+      "date": "2022-02-21",
+      "contents": "\r\n\r\nContents\r\nTest Page\r\nSub-section\r\nDistill 활용 방법\r\n\r\n\r\nTest Page\r\n최\r\n재\r\n성\r\nSub-section\r\nDistill 활용 방법\r\n\r\n\r\n\r\n",
+      "last_modified": "2022-02-21T00:24:45+09:00"
+    },
+    {
+      "path": "news_app.html",
+      "title": "네이버 뉴스 검색 애플리케이션",
+      "description": "간단한 애플리케이션을 만들어 봅니다. **koscrap** 패키지를 이용해서 **네이버 뉴스 검색 애플리케이션**을 만듭니다.\n",
+      "author": [
+        {
+          "name": "유충현",
+          "url": "https://choonghyunryu.github.io"
+        }
+      ],
+      "date": "2022-02-06",
+      "contents": "\r\n\r\nContents\r\n애플리케이션 설계\r\n기능 설계\r\n사용자 인터페이스 설계\r\n\r\n애플리케이션 코드\r\nUI Side\r\nServer Side\r\n사용 패키지 및 애플리케이션 호출\r\n사용 패키지\r\n애플리케이션 호출\r\n\r\n\r\n애플리케이션 실행\r\n애플리케이션 실행 화면\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n들어가기\r\n공격이 최선의 방어라는 격투기 격언이 있습니다. Shiny의 경우는\r\n실제로 애플리케이션을 개발해 보는 것이 최선의 학습\r\n입니다.\r\n\r\n간단하지만, 유용한 애플리케이션을 만들어 볼까요? 걱정할 필요 없습니다. 천천히 따라오세요\r\n\r\n\r\n애플리케이션 설계\r\n기능 설계\r\n네이버 뉴스 검색 애플리케이션의 기능은 다음과 같이 정의합니다.\r\n입력 기능\r\n사용자 인증을 위한 Client ID, Client Secret 입력\r\n검색하려는 뉴스 키워드 입력\r\n정렬 옵션 선택\r\n날짜순 정렬\r\n유사도순 정렬\r\n\r\n검색건수 입력\r\n\r\n출력 기능\r\n검색 뉴스 테이블 출력\r\n타이틀\r\n뉴스내용 요약\r\n뉴스 게시시간\r\n뉴스 링크\r\n하이퍼링크를 걸어서, 클릭하면 해당 브라우저 창을 열어 뉴스화면 이동\r\n\r\n\r\n\r\n사용자 인터페이스 설계\r\n페이지\r\nfluidPage\r\n\r\n레이아웃\r\nsidebarLayout\r\n\r\n패널\r\nsidebarPanel\r\n입력 위젯 위치\r\n\r\nmainPanel\r\n출력 위젯 위치\r\n\r\n\r\n입력 위젯\r\ntextInput\r\nClient ID, Client Secret, 검색 키워드\r\n\r\nradioButtons\r\n정렬 옵션 선택\r\n\r\nsliderInput\r\n검색건수\r\n\r\nactionButton\r\n뉴스 검색 버튼\r\n\r\n\r\n출력 위젯\r\nreactable\r\n검색 결과 출력\r\n\r\n\r\n애플리케이션 코드\r\nUI Side\r\n\r\n# UI Side\r\nui <- fluidPage(\r\n    # Application title\r\n    titlePanel(\"네이버 뉴스 검색 애플리케이션\"),\r\n\r\n    # Sidebar with a slider input for number of bins \r\n    sidebarLayout(\r\n        sidebarPanel(\r\n            textInput(\"client_id\", \r\n                      label = h4(\"Client ID:\"), \r\n                      value = \"\"),\r\n            textInput(\"client_secret\", \r\n                      label = h4(\"Client Secret:\"), \r\n                      value = \"\"),            \r\n            textInput(\"keyword\", \r\n                      label = h4(\"검색 키워드:\"), \r\n                      value = \"\"),\r\n            radioButtons(\"sort\", label = h4(\"정렬 옵션:\"),\r\n                         choices = list(\"날짜순\" = \"date\", \"유사도순\" = \"sim\"), \r\n                         selected = \"date\"),           \r\n            sliderInput(\"max_record\", label = h4(\"검색 건수:\"), min = 0, \r\n                        max = 500, value = 100),\r\n            actionButton(\"search_keyword\", label = \"뉴스 검색\", \r\n                         icon = icon(\"newspaper\")),\r\n            width = 3\r\n        ),\r\n\r\n        # Reactable에 검색 결과 리스트업\r\n        mainPanel(\r\n            reactableOutput(\"news_list\"),\r\n            width = 9\r\n        )\r\n    )\r\n)\r\n\r\nServer Side\r\n\r\n# Server Side\r\nserver <- function(input, output) {\r\n    output$news_list <- renderReactable({\r\n        # 뉴스 검색 리스트의 초기화 출력\r\n        init_data <- data.frame(\r\n            title = character(0),\r\n            description = character(0),\r\n            publish_date = character(0),\r\n            link = character(0),\r\n            stringsAsFactors = FALSE\r\n        )\r\n        \r\n        reactable(\r\n            init_data,\r\n            defaultColDef = colDef(\r\n                align = \"left\"\r\n            ),\r\n            columns = list(\r\n                title = colDef(\r\n                    name = \"타이틀\",\r\n                    width = 250,\r\n                ),\r\n                description = colDef(name = \"뉴스내용 요약\"),\r\n                publish_date = colDef(\r\n                    name = \"뉴스 계시시간\",\r\n                    width = 150,\r\n                ),\r\n                link = colDef(\r\n                    name = \"뉴스 링크\",\r\n                    width = 250#,\r\n                    # cell = function(value) {\r\n                    #     print(value)\r\n                    #     cat(value)\r\n                    #     htmltools::tags$a(href = value, target = \"_blank\", value)\r\n                    # }\r\n                )    \r\n            ),\r\n            showPageSizeOptions = TRUE,\r\n            pageSizeOptions = c(5, 10, 15), \r\n            defaultPageSize = 5,\r\n            bordered = TRUE,\r\n            highlight = TRUE\r\n        )\r\n    })\r\n    \r\n    observeEvent(input$search_keyword, {\r\n        # 3개의 텍스트는 반드시 입력해야 함\r\n        req(input$keyword)\r\n        req(input$client_id)\r\n        req(input$client_secret)\r\n        \r\n        # 네이버 오픈 API 호출\r\n        search_list <- koscrap::search_naver(\r\n            query = input$keyword, \r\n            sort  = input$sort,\r\n            chunk = min(input$max_record, 100),\r\n            max_record = input$max_record,\r\n            do_done = TRUE,\r\n            client_id = input$client_id, \r\n            client_secret = input$client_secret) %>%\r\n            mutate(title = title_text) %>% \r\n            mutate(description = description_text) %>% \r\n            mutate(publish_date = stringr::str_remove_all(publish_date, \r\n                                                          \"[[:alpha:]]\")) %>% \r\n            select(title, description, publish_date, link)\r\n            \r\n        updateReactable(\"news_list\", \r\n                        data = search_list)\r\n    })\r\n}\r\n\r\n사용 패키지 및 애플리케이션 호출\r\n사용 패키지\r\n\r\n\r\nlibrary(\"shiny\")\r\nlibrary(\"dplyr\")\r\nlibrary(\"koscrap\")\r\nlibrary(\"reactable\")\r\nlibrary(\"htmltools\")\r\n\r\n\r\n\r\n애플리케이션 호출\r\n\r\n\r\n# Run the application \r\nshinyApp(ui = ui, server = server)\r\n\r\n\r\n\r\n애플리케이션 실행\r\n애플리케이션 실행 화면\r\n애플리케이션을 실행하면 다음과 같의 화면을 얻을 수 있습니다.\r\n네이버 뉴스 검색 애플리케이션\r\n\r\n\r\n",
+      "last_modified": "2022-02-21T00:25:26+09:00"
     }
   ],
   "collections": []
