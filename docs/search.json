@@ -6,15 +6,15 @@
       "description": "Some additional details about the website",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-02-20T23:52:43+09:00"
+      "last_modified": "2022-02-21T00:01:49+09:00"
     },
     {
       "path": "index.html",
       "title": "Test Page",
       "description": "Welcome to the website. I hope you enjoy it!\n",
       "author": [],
-      "contents": "\r\nTest Page\r\n최\r\n재\r\n성\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-02-20T23:52:44+09:00"
+      "contents": "\r\nTest Page\r\n최\r\n재\r\n성\r\nSub-section\r\nDistill 활용 방법\r\n\r\n\r\n\r\n",
+      "last_modified": "2022-02-21T00:01:50+09:00"
     }
   ],
   "collections": []
